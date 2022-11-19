@@ -23,7 +23,6 @@ public class CategoryService {
         return list.stream().map(CategoryDto::new).collect(Collectors.toList());
     }
 
-
     @Transactional(readOnly = true)
     public CategoryDto findById(Long id) {
         return new CategoryDto(
@@ -31,5 +30,12 @@ public class CategoryService {
                 () -> new EntityNotFoundException("Categoria não encontrada!")
             )
         );
+    }
+
+    @Transactional
+    public CategoryDto insert(CategoryDto dto) {
+        Category entity = new Category();
+        entity.setNome(dto.getName());
+        return new CategoryDto(repository.save(entity));
     }
 }

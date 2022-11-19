@@ -13,7 +13,7 @@ public class CategoryDto {
 
     public CategoryDto(Category entity) {
         this.id = entity.getId();
-        this.name = entity.getNome();
+        this.name = entity.getName();
     }
 
     public CategoryDto(Long id, String name) {

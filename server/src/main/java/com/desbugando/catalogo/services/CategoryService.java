@@ -21,4 +21,10 @@ public class CategoryService {
 
         return list.stream().map(CategoryDto::new).collect(Collectors.toList());
     }
+
+
+    @Transactional(readOnly = true)
+    public CategoryDto findById(Long id) {
+        return new CategoryDto(repository.findById(id).get());
+    }
 }

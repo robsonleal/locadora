@@ -3,8 +3,11 @@ package com.desbugando.catalogo.services;
 import com.desbugando.catalogo.dtos.CategoryDto;
 import com.desbugando.catalogo.entities.Category;
 import com.desbugando.catalogo.repositories.CategoryRepository;
+import com.desbugando.catalogo.services.exceptions.DatabaseException;
 import com.desbugando.catalogo.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,6 +51,16 @@ public class CategoryService {
             return new CategoryDto(repository.save(entity));
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException("Categoria não encontrada!");
+        }
+    }
+
+    public void delete(Long id) {
+        try {
+            repository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException("Categoria não encontrada!");
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException("Violação da integridade do banco de dados");
         }
     }
 }

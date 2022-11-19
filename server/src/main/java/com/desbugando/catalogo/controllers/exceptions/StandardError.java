@@ -1,4 +1,4 @@
-package com.desbugando.catalogo.repositories.exceptions;
+package com.desbugando.catalogo.controllers.exceptions;
 
 import java.io.Serializable;
 import java.time.Instant;

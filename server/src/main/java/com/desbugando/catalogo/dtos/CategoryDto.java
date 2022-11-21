@@ -1,8 +1,10 @@
 package com.desbugando.catalogo.dtos;
 
+import java.io.Serializable;
+
 import com.desbugando.catalogo.entities.Category;
 
-public class CategoryDto {
+public class CategoryDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;

@@ -17,6 +17,9 @@ import javax.persistence.EntityNotFoundException;
 
 @Service
 public class CategoryService {
+
+    private String mensagemErroCategoria404 = "Categoria não encontrada";
+
     @Autowired
     private CategoryRepository repository;
 
@@ -31,7 +34,7 @@ public class CategoryService {
     public CategoryDto findById(Long id) {
         return new CategoryDto(
             repository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Categoria não encontrada!")
+                () -> new ResourceNotFoundException(mensagemErroCategoria404)
             )
         );
     }
@@ -50,7 +53,7 @@ public class CategoryService {
             entity.setName(dto.getName());
             return new CategoryDto(repository.save(entity));
         } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException("Categoria não encontrada!");
+            throw new ResourceNotFoundException(mensagemErroCategoria404);
         }
     }
 
@@ -58,7 +61,7 @@ public class CategoryService {
         try {
             repository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
-            throw new ResourceNotFoundException("Categoria não encontrada!");
+            throw new ResourceNotFoundException(mensagemErroCategoria404);
         } catch (DataIntegrityViolationException e) {
             throw new DatabaseException("Violação da integridade do banco de dados");
         }

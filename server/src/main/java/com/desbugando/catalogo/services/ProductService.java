@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +21,7 @@ import javax.persistence.EntityNotFoundException;
 @Service
 public class ProductService {
 
-    private final String MESSAGE_NOT_FOUND_CATEGORY = "Categoria não encontrada";
+    private final String MESSAGE_NOT_FOUND_PRODUCT = "Produto não encontrado";
 
     @Autowired
     private ProductRepository repository;
@@ -30,16 +30,16 @@ public class ProductService {
     private CategoryRepository categoryRepository;
 
     @Transactional(readOnly = true)
-    public Page<ProductDto> findAllPaged(PageRequest pageRequest) {
-        Page<Product> pageable = repository.findAll(pageRequest);
+    public Page<ProductDto> findAllPaged(Pageable pageable) {
+        Page<Product> list = repository.findAll(pageable);
 
-        return pageable.map(ProductDto::new);
+        return list.map(ProductDto::new);
     }
 
     @Transactional(readOnly = true)
     public ProductDto findById(Long id) {
         Product entity = repository.findById(id).orElseThrow(
-            () -> new ResourceNotFoundException(MESSAGE_NOT_FOUND_CATEGORY)
+            () -> new ResourceNotFoundException(MESSAGE_NOT_FOUND_PRODUCT)
         );
         
         return new ProductDto(entity, entity.getCategories());
@@ -59,7 +59,7 @@ public class ProductService {
             copyDtoToEntity(dto, entity);
             return new ProductDto(repository.save(entity));
         } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException(MESSAGE_NOT_FOUND_CATEGORY);
+            throw new ResourceNotFoundException(MESSAGE_NOT_FOUND_PRODUCT);
         }
     }
 
@@ -67,7 +67,7 @@ public class ProductService {
         try {
             repository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
-            throw new ResourceNotFoundException(MESSAGE_NOT_FOUND_CATEGORY);
+            throw new ResourceNotFoundException(MESSAGE_NOT_FOUND_PRODUCT);
         } catch (DataIntegrityViolationException e) {
             throw new DatabaseException("Violação da integridade do banco de dados");
         }

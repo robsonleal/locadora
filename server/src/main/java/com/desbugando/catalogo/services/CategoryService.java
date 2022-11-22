@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,23 +18,23 @@ import javax.persistence.EntityNotFoundException;
 @Service
 public class CategoryService {
 
-    private String mensagemErroCategoria404 = "Categoria não encontrada";
+    private final String MESSAGE_NOT_FOUND_CATEGORY = "Categoria não encontrada";
 
     @Autowired
     private CategoryRepository repository;
 
     @Transactional(readOnly = true)
-    public Page<CategoryDto> findAllPaged(PageRequest pageRequest) {
-        Page<Category> pageable = repository.findAll(pageRequest);
+    public Page<CategoryDto> findAllPaged(Pageable pageable) {
+        Page<Category> list = repository.findAll(pageable);
 
-        return pageable.map(CategoryDto::new);
+        return list.map(CategoryDto::new);
     }
 
     @Transactional(readOnly = true)
     public CategoryDto findById(Long id) {
         return new CategoryDto(
             repository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException(mensagemErroCategoria404)
+                () -> new ResourceNotFoundException(MESSAGE_NOT_FOUND_CATEGORY)
             )
         );
     }
@@ -53,7 +53,7 @@ public class CategoryService {
             entity.setName(dto.getName());
             return new CategoryDto(repository.save(entity));
         } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException(mensagemErroCategoria404);
+            throw new ResourceNotFoundException(MESSAGE_NOT_FOUND_CATEGORY);
         }
     }
 
@@ -61,7 +61,7 @@ public class CategoryService {
         try {
             repository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
-            throw new ResourceNotFoundException(mensagemErroCategoria404);
+            throw new ResourceNotFoundException(MESSAGE_NOT_FOUND_CATEGORY);
         } catch (DataIntegrityViolationException e) {
             throw new DatabaseException("Violação da integridade do banco de dados");
         }

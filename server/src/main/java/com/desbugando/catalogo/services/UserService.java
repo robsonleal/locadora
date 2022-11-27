@@ -23,7 +23,7 @@ import javax.persistence.EntityNotFoundException;
 @Service
 public class UserService {
 
-    private final String MESSAGE_NOT_FOUND_PRODUCT = "Produto não encontrado";
+    private final String MESSAGE_NOT_FOUND_PRODUCT = "Usuário não encontrado";
 
     @Autowired
     private UserRepository repository;

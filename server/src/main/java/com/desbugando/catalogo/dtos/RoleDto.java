@@ -2,12 +2,15 @@ package com.desbugando.catalogo.dtos;
 
 import com.desbugando.catalogo.entities.Role;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 public class RoleDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
+
+    @NotBlank
     private String authority;
 
     public RoleDto() {

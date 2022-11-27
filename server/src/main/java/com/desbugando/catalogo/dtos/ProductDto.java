@@ -9,14 +9,26 @@ import java.util.Set;
 import com.desbugando.catalogo.entities.Category;
 import com.desbugando.catalogo.entities.Product;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
+
 public class ProductDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
+
+    @NotBlank(message = "Campo obrigatório")
     private String name;
+
     private String description;
+
+    @Positive(message = "Campo inválido")
     private Double price;
+
     private String imgUrl;
+
+    @PastOrPresent(message = "Campo inválido")
     private Instant date;
 
     private List<CategoryDto> categories = new ArrayList<>();

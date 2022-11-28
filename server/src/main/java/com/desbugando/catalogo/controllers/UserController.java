@@ -2,6 +2,7 @@ package com.desbugando.catalogo.controllers;
 
 import com.desbugando.catalogo.dtos.UserDto;
 import com.desbugando.catalogo.dtos.UserInsertDto;
+import com.desbugando.catalogo.dtos.UserUpdateDto;
 import com.desbugando.catalogo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -45,7 +46,7 @@ public class UserController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<UserDto> update(@PathVariable Long id, @Valid @RequestBody UserDto dto) {
+    public ResponseEntity<UserDto> update(@PathVariable Long id, @Valid @RequestBody UserUpdateDto dto) {
         return ResponseEntity.ok().body(service.update(id, dto));
     }
 

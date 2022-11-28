@@ -3,6 +3,7 @@ package com.desbugando.catalogo.services;
 import com.desbugando.catalogo.dtos.RoleDto;
 import com.desbugando.catalogo.dtos.UserDto;
 import com.desbugando.catalogo.dtos.UserInsertDto;
+import com.desbugando.catalogo.dtos.UserUpdateDto;
 import com.desbugando.catalogo.entities.Role;
 import com.desbugando.catalogo.entities.User;
 import com.desbugando.catalogo.repositories.RoleRepository;
@@ -59,7 +60,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserDto update(Long id, UserDto dto) {
+    public UserDto update(Long id, UserUpdateDto dto) {
         try {
             User entity = repository.getReferenceById(id);
             copyDtoToEntity(dto, entity);

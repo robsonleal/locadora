@@ -1,12 +1,9 @@
 import 'assets/styles/custom.scss';
 import './App.css';
-import { Home } from 'pages/Home';
-import { Catalogo } from 'pages/Catalogo';
+import { MyRoutes } from 'Routes';
 
 const App = () => {
-  return (
-    <Catalogo />
-  );
+  return <MyRoutes />;
 };
 
 export default App;

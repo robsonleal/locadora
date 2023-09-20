@@ -40,7 +40,7 @@ public class Categoria {
 	@Column(name = "DAT_ATUALIZACAO", nullable = false)
 	private Instant atualizadoEm;
 
-	@ManyToMany(mappedBy = "categories")
+	@ManyToMany(mappedBy = "categorias")
 	private Set<Filme> filmes = new HashSet<>();
 
 	public Categoria(Long id, String nome) {

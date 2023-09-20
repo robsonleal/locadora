@@ -8,12 +8,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -27,10 +29,4 @@ public class Role implements GrantedAuthority {
 
   @Column(name = "TXT_AUTHORITY")
 	private String authority;
-	
-	public Role(Long id, String authority) {
-		super();
-		this.id = id;
-		this.authority = authority;
-	}
 }

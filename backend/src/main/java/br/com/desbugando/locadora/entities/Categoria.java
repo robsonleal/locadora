@@ -30,7 +30,7 @@ public class Categoria {
 	private Long id;
 
 	@Column(name = "TXT_NOME")
-	private String name;
+	private String nome;
 
 	@CreatedDate
 	@Column(name = "DAT_CRIACAO", nullable = false, updatable = false)
@@ -43,8 +43,8 @@ public class Categoria {
 	@ManyToMany(mappedBy = "categories")
 	private Set<Filme> filmes = new HashSet<>();
 
-	public Categoria(Long id, String name) {
+	public Categoria(Long id, String nome) {
 		this.id = id;
-		this.name = name;
+		this.nome = nome;
 	}
 }

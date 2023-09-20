@@ -29,7 +29,7 @@ public class Categoria {
 	@Column(name = "OID_CATEGORIA")
 	private Long id;
 
-	@Column(name = "TXT_NAME")
+	@Column(name = "TXT_NOME")
 	private String name;
 
 	@CreatedDate

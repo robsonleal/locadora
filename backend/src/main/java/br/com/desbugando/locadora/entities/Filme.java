@@ -1,6 +1,5 @@
 package br.com.desbugando.locadora.entities;
 
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -44,8 +43,8 @@ public class Filme {
 	@Column(name = "TXT_CAPA_URL")
 	private String capaURL;
 
-	@Column(name = "DAT_LANCAMENTO")
-	private LocalDate dataLancamento;
+	@Column(name = "NUM_ANO_LANCAMENTO")
+	private int anoLancamento;
 
 	@ManyToMany
 	@JoinTable(name = "TB_FILME_CATEGORIA", 

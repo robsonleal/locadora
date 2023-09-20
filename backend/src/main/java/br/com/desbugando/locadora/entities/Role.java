@@ -1,5 +1,7 @@
 package br.com.desbugando.locadora.entities;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +19,7 @@ import lombok.Setter;
 @EqualsAndHashCode
 @Entity
 @Table(name = "TB_ROLES")
-public class Role {
+public class Role implements GrantedAuthority {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "OID_ROLE")

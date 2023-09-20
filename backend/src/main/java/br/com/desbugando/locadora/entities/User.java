@@ -3,10 +3,8 @@ package br.com.desbugando.locadora.entities;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
@@ -42,19 +40,17 @@ public class User implements UserDetails {
 
 	@Column(name = "TXT_SOBRENOME")
 	private String lastName;
-	
+
 	@Column(name = "TXT_EMAIL", unique = true)
 	private String email;
 
 	@Column(name = "BCR_PASSWORD")
 	private String password;
-	
+
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "TB_USER_ROLE",
-		joinColumns = @JoinColumn(name = "OID_USER"),
-		inverseJoinColumns = @JoinColumn(name = "OID_ROLE"))	
+	@JoinTable(name = "TB_USER_ROLE", joinColumns = @JoinColumn(name = "OID_USER"), inverseJoinColumns = @JoinColumn(name = "OID_ROLE"))
 	private Set<Role> roles = new HashSet<>();
-	
+
 	public User(Long id, String firstName, String lastName, String email, String password) {
 		super();
 		this.id = id;
@@ -64,10 +60,13 @@ public class User implements UserDetails {
 		this.password = password;
 	}
 
+	public void addRole(Role role) {
+		roles.add(role);
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getAuthority()))
-				.collect(Collectors.toList());
+		return roles;
 	}
 
 	@Override

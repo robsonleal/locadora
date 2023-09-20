@@ -40,7 +40,7 @@ public class FilmeDTO {
 	private int anoLancamento;
 	
 	@NotEmpty(message = "Produto sem categoria não é permitido")
-	private List<CategoriaDTO> categories = new ArrayList<>();
+	private List<CategoriaDTO> categorias = new ArrayList<>();
 	
 	public FilmeDTO(Long id, String titulo, String sinopse, int duracao, String capaURL, int anoLancamento) {
 		this.id = id;
@@ -62,6 +62,6 @@ public class FilmeDTO {
 
 	public FilmeDTO(Filme entity, Set<Categoria> categories) {
 		this(entity);
-		categories.forEach(cat -> this.categories.add(new CategoriaDTO(cat)));
+		categories.forEach(cat -> this.categorias.add(new CategoriaDTO(cat)));
 	}
 }

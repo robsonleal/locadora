@@ -50,5 +50,5 @@ public class Filme {
 	@JoinTable(name = "TB_FILME_CATEGORIA", 
 							joinColumns = @JoinColumn(name = "OID_FILME"),
 							inverseJoinColumns = @JoinColumn(name = "OID_CATEGORIA"))
-	Set<Categoria> categories = new HashSet<>();
+	Set<Categoria> categorias = new HashSet<>();
 }

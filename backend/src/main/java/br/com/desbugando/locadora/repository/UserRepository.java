@@ -12,6 +12,8 @@ import br.com.desbugando.locadora.projections.UserDetailsProjection;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
+	User findByEmail(String email);
+
 	@Query(nativeQuery = true, value = """
 				SELECT tb_users.txt_email AS txt_nome, tb_users.bcr_password, tb_roles.oid_role AS roleId, tb_roles.txt_authority
 				FROM tb_users

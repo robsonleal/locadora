@@ -1,0 +1,55 @@
+$tela-m: '(min-width: 576px)';
+$tela-g: '(min-width: 768px)';
+$tela-x: '(min-width: 992px)';
+$tela-xl: '(min-width: 1200px)';
+
+.btn:hover {
+  color: #FFF;
+}
+
+.btn-container {
+  display: flex;
+  height: 50px;
+  padding-inline: 0px;
+  border-radius: 20px;
+  background-color: #407bff;
+  align-items: center;
+  box-sizing: border-box;
+  color: #FFF;
+
+  @media #{$tela-x} {
+    height: 70px;
+  }
+}
+
+.btn-text-container {
+  width: 200px;
+
+  h6 {
+    font-size: 13px;
+  }
+
+  @media #{$tela-m} {
+    width: 380px;
+
+    h6 {
+      font-size: 16px;
+    }
+  }
+}
+
+.btn-icon-container {
+  width: 52px;
+  height: 50px; 
+  background-color: #26323850;
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border-radius: 0px 20px 20px 0px;
+
+  @media #{$tela-x} {
+    width: 70px;
+    height: 70px;
+  }
+}

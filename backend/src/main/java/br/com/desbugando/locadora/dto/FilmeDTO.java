@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import br.com.desbugando.locadora.dto.validation.AnoLancamentoValid;
 import br.com.desbugando.locadora.entities.Categoria;
 import br.com.desbugando.locadora.entities.Filme;
 import jakarta.validation.constraints.NotBlank;
@@ -36,8 +37,8 @@ public class FilmeDTO {
 	@NotBlank(message = "Campo requerido")
 	private String capaURL;
 	
-	@NotBlank(message = "A data do produto não pode ser futura")
-	private int anoLancamento;
+	@AnoLancamentoValid
+	private Integer anoLancamento;
 	
 	@NotEmpty(message = "Produto sem categoria não é permitido")
 	private List<CategoriaDTO> categorias = new ArrayList<>();

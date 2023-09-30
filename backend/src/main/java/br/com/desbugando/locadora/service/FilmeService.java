@@ -1,8 +1,6 @@
 package br.com.desbugando.locadora.service;
 
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -32,13 +30,8 @@ public class FilmeService {
 	private CategoriaRepository categoryRepository;
 
 	@Transactional(readOnly = true)
-	public Page<FilmeDTO> findAllPaged(Long categoryId, String name, Pageable pageable) {
-		Set<Categoria> categories = new HashSet<>();
-		if (categoryId != 0) {
-			categories.add(categoryRepository.getReferenceById(categoryId));
-		}
-		Page<Filme> page = repository.find(categories, name, pageable);
-		repository.findFilmesWithCategories(new HashSet<>(page.getContent()));
+	public Page<FilmeDTO> findAllPaged(Pageable pageable) {
+		Page<Filme> page = repository.findAll(pageable);
 		return page.map(x -> new FilmeDTO(x, x.getCategorias()));
 	}
 

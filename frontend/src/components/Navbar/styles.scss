@@ -1,0 +1,29 @@
+$navbar-light-color: #ffffff50;
+$navbar-light-active-color: #fff;
+$navbar-light-hover-color: #fff;
+$navbar-light-icon-color: #FFF;
+
+.navbar {
+  min-height: 70px;
+
+  .navbar-brand {
+    margin-left: 40px;
+  }
+
+  .nav-item {
+    padding: 0;
+    margin-right: 85px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .nav-link {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
